@@ -6,6 +6,7 @@
 	<!-- jsPsych library -->
 	<script src="https://victoria0527.github.io/jsPsychSheet/jspsych/jspsych.js"></script>
 	<script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-external-html.js"></script>
 	<script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-html-slider-response.js"></script>
 	<script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-video-button-response.js"></script>
 	<link rel="stylesheet" href="https://victoria0527.github.io/jsPsychSheet/jspsych/css/jspsych.css">
@@ -50,7 +51,6 @@
   		return false;
 	};
 
-
 	// declare the block.
 	var trial = {
   		type:'external-html',
@@ -58,7 +58,7 @@
   		cont_btn: "start",
   		check_fn: check_consent
 	};
-    
+	timeline.push(check_consent);
     
     /* Present a randomized order of all of the videos/trials you wish to show */
     /* Make sure the answer choices are contingent on the video */
