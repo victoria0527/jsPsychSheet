@@ -6,7 +6,7 @@
 	<!-- jsPsych library -->
 	<script src="https://victoria0527.github.io/jsPsychSheet/jspsych/jspsych.js"></script>
 	<script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-html-keyboard-response.js"></script>
-    <script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-external-html.js"></script>
+    	<script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-external-html.js"></script>
 	<script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-html-slider-response.js"></script>
 	<script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-video-button-response.js"></script>
 	<link rel="stylesheet" href="https://victoria0527.github.io/jsPsychSheet/jspsych/css/jspsych.css">
@@ -37,6 +37,46 @@
   		stimulus: "Welcome to the experiment. Press any key to begin."
 	};
 	timeline.push(welcome);
+	
+	var instructions = {
+		type: "html-keyboard-response",
+		stimulus: "Please plug in headphones/turn on your speakers, adjust the volume to comfortable level, and sit roughly an arm’s length away from the screen. Press any key to continue."
+	};
+	timeline.push(instructions);
+	
+	var pre_if_trial = {
+    		type: 'video-keyboard-response',
+    		source: 'https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4',
+		prompt: '<p> Press Y if you heard the video, or R to replay it.<p>'
+	}
+
+	var if_trial = {
+    		type: 'html-keyboard-response',
+    		stimulus: 'You are ready to begin the experiment. Press any key to continue.'
+	}
+
+	var if_node = {
+    		timeline: [if_trial],
+    		conditional_function: function(){
+        		// get the data from the previous trial,
+        		// and check which key was pressed
+        		var data = jsPsych.data.get().last(1).values()[0];
+        		if(data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode('y')){
+            			return false;
+        		} else {
+            			return true;
+        		}
+    		}
+	}
+
+	var after_if_trial = {
+    		type: 'html-keyboard-response',
+    		stimulus: 'This is the trial after the conditional.'
+	}
+
+	jsPsych.init({
+    		timeline: [pre_if_trial, if_node, after_if_trial]
+	});
 	
 	// sample function that might be used to check if a subject has given
 	// consent to participate.
