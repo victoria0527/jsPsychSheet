@@ -59,13 +59,14 @@
     };
 
 
-// declare the block.
-var trial = {
-  type:'external-html',
-  url: "external_page.html",
-  cont_btn: "start",
-  check_fn: check_consent
-};
+	// declare the block.
+    var trial = 
+	type:'external-html',
+  	url: "external_page.html",
+  	cont_btn: "start",
+  	check_fn: check_consent
+    };
+    timeline.push(trial);
 	
 	var pre_if_trial = {
     		type: 'video-keyboard-response',
