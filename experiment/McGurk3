@@ -161,6 +161,12 @@
 	}
 	timeline.push(mcGurkProcedure1);
     
+    var ending = {
+		type: "html-keyboard-response",
+		stimulus: "Great job on the pretrials! The real experiment will now begin. Press any key to continue."
+	};
+	timeline.push(ending);
+    
 	var mcGurkProcedure2 = {
 		timeline: [
 			{
