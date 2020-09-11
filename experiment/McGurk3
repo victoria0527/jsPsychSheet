@@ -6,7 +6,8 @@
 	<!-- jsPsych library -->
 	<script src="https://victoria0527.github.io/jsPsychSheet/jspsych/jspsych.js"></script>
 	<script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-html-keyboard-response.js"></script>
-    	<script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-external-html.js"></script>
+    <script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-video-keyboard-response.js"></script>
+    <script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-external-html.js"></script>
 	<script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-html-slider-response.js"></script>
 	<script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-video-button-response.js"></script>
 	<link rel="stylesheet" href="https://victoria0527.github.io/jsPsychSheet/jspsych/css/jspsych.css">
@@ -46,7 +47,7 @@
 	
 	var pre_if_trial = {
     		type: 'video-keyboard-response',
-    		source: 'https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4',
+    		sources: 'https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4',
 		prompt: '<p> Press Y if you heard the video, or R to replay it.<p>'
 	}
 
@@ -71,7 +72,7 @@
 
 	var after_if_trial = {
     		type: 'html-keyboard-response',
-    		stimulus: 'This is the trial after the conditional.'
+    		stimulus: 'Press any key to continue.'
 	}
 
 	jsPsych.init({
@@ -94,7 +95,7 @@
 	// declare the block.
 	var trial = {
   		type:'external-html',
-  		url: "external_page.html",
+  		url: "https://github.com/victoria0527/jsPsychSheet/blob/master/experiment/external%20page.html",
   		cont_btn: "start",
   		check_fn: check_consent
 	};
@@ -106,7 +107,61 @@
     /* We'll have to decide which options to give for the ones that aren't from that table */
     /* To learn more, check out https://www.jspsych.org/overview/timeline/#timeline-variables */
     
-	var mcGurkProcedure = {
+    var directions = {
+		type: "html-keyboard-response",
+		stimulus: "You will now be shown test videos to get you used to the experimental procedures. Press any key to continue."
+	};
+	timeline.push(directions);
+    
+    var mcGurkProcedure1 = {
+		timeline: [
+			{
+				type: 'video-button-response',
+				sources: jsPsych.timelineVariable('video'),
+				width: 800,
+				choices: [],
+				data: jsPsych.timelineVariable('video'), /* Store the video name */
+				trial_ends_after_video: true,
+				prompt: '<p></p>'
+				
+			},
+			{
+				type: 'video-button-response',
+				sources: [],
+				width: 800,
+				choices: jsPsych.timelineVariable('syllables'),
+				data: jsPsych.timelineVariable('syllables'), /* Store the answer choices on that trial */
+				prompt: '<p>Which syllable did you perceive?</p>'
+				
+			},
+			{
+				type: 'html-slider-response',
+				stimulus: '<p>How confident are you in your answer?</p>',
+				labels: ['0','25','50','75','100'],
+				min: 0,
+				max: 100,
+				start: function(){
+					return jsPsych.randomization.sampleWithoutReplacement([10, 20, 30, 40, 50, 60, 70, 80, 90], 1)[0];
+					},
+				step: 1,
+				prompt: "<p>Rate confidence from 0 (no confidence) to 100 (fully confident)</p>"
+			}
+		],
+		timeline_variables: [
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4'], syllables: ['Still need to decide what these choices should be'] },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Da','Ga','Pa'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ga','Da','Ma'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ka','Ga','Da'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualNa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Na','Ga','Da'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryTaVisualGa.mp4'], syllables: ['Still need to decide what these choices should be'] },
+			
+		],
+		randomize_order: true,
+    	repetitions: 1
+	}
+	timeline.push(mcGurkProcedure1);
+    
+	var mcGurkProcedure2 = {
 		timeline: [
 			{
 				type: 'video-button-response',
@@ -165,7 +220,7 @@
 		randomize_order: true,
     	repetitions: 1
 	}
-	timeline.push(mcGurkProcedure);
+	timeline.push(mcGurkProcedure2);
 	
 
 	/* start the experiment */
