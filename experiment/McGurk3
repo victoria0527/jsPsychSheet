@@ -6,8 +6,8 @@
 	<!-- jsPsych library -->
 	<script src="https://victoria0527.github.io/jsPsychSheet/jspsych/jspsych.js"></script>
 	<script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-html-keyboard-response.js"></script>
-    	<script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-video-keyboard-response.js"></script>
-    	<script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-external-html.js"></script>
+    <script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-video-keyboard-response.js"></script>
+    <script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-external-html.js"></script>
 	<script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-html-slider-response.js"></script>
 	<script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-video-button-response.js"></script>
 	<link rel="stylesheet" href="https://victoria0527.github.io/jsPsychSheet/jspsych/css/jspsych.css">
@@ -38,13 +38,7 @@
   		stimulus: "Welcome to the experiment. Press any key to begin."
 	};
 	timeline.push(welcome);
-	
-	var instructions = {
-		type: "html-keyboard-response",
-		stimulus: "Please plug in headphones/turn on your speakers, adjust the volume to comfortable level, and sit roughly an arm’s length away from the screen. Press any key to continue."
-	};
-	timeline.push(instructions);
-    
+	   
     // sample function that might be used to check if a subject has given
     // consent to participate.
     var check_consent = function(elem) {
@@ -59,14 +53,20 @@
     };
 
 
-	// declare the block.
-    var trial = 
-	type:'external-html',
-  	url: "external_page.html",
-  	cont_btn: "start",
-  	check_fn: check_consent
+    // declare the block.
+    var trial = {
+      type:'external-html',
+      url: "https://victoria0527.github.io/jsPsychSheet/experiment/external_page.html",
+      cont_btn: "start",
+      check_fn: check_consent
     };
     timeline.push(trial);
+  
+  	var instructions = {
+		type: "html-keyboard-response",
+		stimulus: "Please plug in headphones/turn on your speakers, adjust the volume to comfortable level, and sit roughly an arm’s length away from the screen. Press any key to continue."
+	};
+	timeline.push(instructions);
 	
 	var pre_if_trial = {
     		type: 'video-keyboard-response',
@@ -150,12 +150,15 @@
 			}
 		],
 		timeline_variables: [
-			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4'], syllables: ['Still need to decide what these choices should be'] },
-			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Da','Ga','Pa'],1) },
-			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ga','Da','Ma'],1) },
-			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ka','Ga','Da'],1) },
-			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualNa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Na','Ga','Da'],1) },
-			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryTaVisualGa.mp4'], syllables: ['Still need to decide what these choices should be'] },
+            		{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Pa','Ga','Ma'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ga','Da','Ma'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryDaVisualMa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ta','Ga','Da'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ga','Ka','Ta'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualMa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Pa','Ga','Ba'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryNaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Na','Da','Ka','Ma'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualPa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ta','Ga','Ba'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Ta','Da','Ka'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryTaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ta','Ga','Ka','Da'],1) },
 			
 		],
 		randomize_order: true,
@@ -165,7 +168,7 @@
     
     var ending = {
 		type: "html-keyboard-response",
-		stimulus: "Great job on the pretrials! The real experiment will now begin. Press any key to continue."
+		stimulus: "Great job on the pretrials! Please get ready for the real experiment to begin. There will be 135 trials divided into three segments. You will be given a break between each segment. Press any key to continue."
 	};
 	timeline.push(ending);
     
@@ -204,31 +207,142 @@
 			}
 		],
 		timeline_variables: [
-			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4'], syllables: ['Still need to decide what these choices should be'] },
-			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Da','Ga','Pa'],1) },
-			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ga','Da','Ma'],1) },
-			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ka','Ga','Da'],1) },
-			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualNa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Na','Ga','Da'],1) },
-			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ta','Pa','Da'],1) },
-			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryDaVisualMa.mp4'], syllables: ['Still need to decide what these choices should be'] },
-			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ga','Na','Ba'],1) },
-			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualKa.mp4'], syllables: ['Still need to decide what these choices should be'] },
-			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualMa.mp4'], syllables: ['Still need to decide what these choices should be'] },
-			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ta','Na','La'],1) },
-			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryNaVisualDa.mp4'], syllables: ['Still need to decide what these choices should be'] },
-			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Da','Ka','Ta'],1) },
-			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Ga','Ka','Ta'],1) },
-			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Da','Ka','Ta'],1) },
-			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualNa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Na','Ka','Ta'],1) },
-			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualPa.mp4'], syllables: ['Still need to decide what these choices should be'] },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Pa','Ga','Ma'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ga','Da','Ma'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryDaVisualMa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ta','Ga','Da'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ga','Ka','Ta'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualMa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Pa','Ga','Ba'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryNaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Na','Da','Ka','Ma'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualPa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ta','Ga','Ba'],1) },
 			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Ta','Da','Ka'],1) },
-			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryTaVisualGa.mp4'], syllables: ['Still need to decide what these choices should be'] },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryTaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ta','Ga','Ka','Da'],1) },
 			
 		],
 		randomize_order: true,
-    	repetitions: 1
+    	repetitions: 5
 	}
 	timeline.push(mcGurkProcedure2);
+    
+    var rest = {
+		type: "html-keyboard-response",
+		stimulus: "You will now have a short break to rest your eyes, use the restroom, etc. There is no time limit. When you are ready, press any key to continue."
+	};
+	timeline.push(rest);    
+    
+	var mcGurkProcedure3 = {
+		timeline: [
+			{
+				type: 'video-button-response',
+				sources: jsPsych.timelineVariable('video'),
+				width: 800,
+				choices: [],
+				data: jsPsych.timelineVariable('video'), /* Store the video name */
+				trial_ends_after_video: true,
+				prompt: '<p></p>'
+				
+			},
+			{
+				type: 'video-button-response',
+				sources: [],
+				width: 800,
+				choices: jsPsych.timelineVariable('syllables'),
+				data: jsPsych.timelineVariable('syllables'), /* Store the answer choices on that trial */
+				prompt: '<p>Which syllable did you perceive?</p>'
+				
+			},
+			{
+				type: 'html-slider-response',
+				stimulus: '<p>How confident are you in your answer?</p>',
+				labels: ['0','25','50','75','100'],
+				min: 0,
+				max: 100,
+				start: function(){
+					return jsPsych.randomization.sampleWithoutReplacement([10, 20, 30, 40, 50, 60, 70, 80, 90], 1)[0];
+					},
+				step: 1,
+				prompt: "<p>Rate confidence from 0 (no confidence) to 100 (fully confident)</p>"
+			}
+		],
+		timeline_variables: [
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Pa','Ga','Ma'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ga','Da','Ma'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryDaVisualMa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ta','Ga','Da'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ga','Ka','Ta'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualMa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Pa','Ga','Ba'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryNaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Na','Da','Ka','Ma'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualPa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ta','Ga','Ba'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Ta','Da','Ka'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryTaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ta','Ga','Ka','Da'],1) },
+			
+		],
+		randomize_order: true,
+    	repetitions: 5
+	}
+	timeline.push(mcGurkProcedure3);    
+    
+    var rest2 = {
+		type: "html-keyboard-response",
+		stimulus: "You will now have a short break to rest your eyes, use the restroom, etc. There is no time limit. When you are ready, press any key to continue."
+	};
+	timeline.push(rest2); 
+    
+	var mcGurkProcedure4 = {
+		timeline: [
+			{
+				type: 'video-button-response',
+				sources: jsPsych.timelineVariable('video'),
+				width: 800,
+				choices: [],
+				data: jsPsych.timelineVariable('video'), /* Store the video name */
+				trial_ends_after_video: true,
+				prompt: '<p></p>'
+				
+			},
+			{
+				type: 'video-button-response',
+				sources: [],
+				width: 800,
+				choices: jsPsych.timelineVariable('syllables'),
+				data: jsPsych.timelineVariable('syllables'), /* Store the answer choices on that trial */
+				prompt: '<p>Which syllable did you perceive?</p>'
+				
+			},
+			{
+				type: 'html-slider-response',
+				stimulus: '<p>How confident are you in your answer?</p>',
+				labels: ['0','25','50','75','100'],
+				min: 0,
+				max: 100,
+				start: function(){
+					return jsPsych.randomization.sampleWithoutReplacement([10, 20, 30, 40, 50, 60, 70, 80, 90], 1)[0];
+					},
+				step: 1,
+				prompt: "<p>Rate confidence from 0 (no confidence) to 100 (fully confident)</p>"
+			}
+		],
+		timeline_variables: [
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Pa','Ga','Ma'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ga','Da','Ma'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryDaVisualMa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ta','Ga','Da'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ga','Ka','Ta'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualMa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Pa','Ga','Ba'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryNaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Na','Da','Ka','Ma'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualPa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ta','Ga','Ba'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Ta','Da','Ka'],1) },
+			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryTaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ta','Ga','Ka','Da'],1) },
+			
+		],
+		randomize_order: true,
+    	repetitions: 5
+	}
+	timeline.push(mcGurkProcedure4);
+    
+    
+    var goodbye = {
+		type: "html-keyboard-response",
+		stimulus: "Congratulations, the experiment is now over. Please do not close your window until it says that the data has finished uploading on the next screen."
+	};
+	timeline.push(goodbye);
 	
 
 	/* start the experiment */
