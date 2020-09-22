@@ -56,21 +56,22 @@
     // declare the block.
     var trial = {
       type:'external-html',
-      url: "https://victoria0527.github.io/jsPsychSheet/experiment/external_page.html",
-      cont_btn: "start",
-      check_fn: check_consent
+      url: "https://ufpaclab.github.io/Consent-Forms/Active/Consent.html",
+      cont_btn: "consent-button"
+      //check_fn: check_consent
     };
     timeline.push(trial);
   
   	var instructions = {
 		type: "html-keyboard-response",
-		stimulus: "Please plug in headphones/turn on your speakers, adjust the volume to comfortable level, and sit roughly an arm’s length away from the screen. Press any key to continue."
+		stimulus: "Please plug in headphones/turn on your speakers, adjust the volume to comfortable level, and sit roughly an arm’s length away from the screen. Please maintain eye contact with the screen while each video is being presented. Press any key to continue."
 	};
 	timeline.push(instructions);
 	
 	var pre_if_trial = {
     		type: 'video-keyboard-response',
-    		sources: 'https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4',
+    		sources: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4'],
+            width: 800,
 		prompt: '<p> Press Y if you heard the video, or R to replay it.<p>'
 	}
 
@@ -96,11 +97,8 @@
 	var after_if_trial = {
     		type: 'html-keyboard-response',
     		stimulus: 'Press any key to continue.'
-	}
-
-	jsPsych.init({
-    		timeline: [pre_if_trial, if_node, after_if_trial]
-	});
+	};
+    timeline.push(pre_if_trial, if_trial, if_node, after_if_trial);
 	
     
     /* Present a randomized order of all of the videos/trials you wish to show */
@@ -150,7 +148,7 @@
 			}
 		],
 		timeline_variables: [
-            		{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Pa','Ga','Ma'],1) },
+            { video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Pa','Ga','Ma'],1) },
 			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ga','Da','Ma'],1) },
 			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryDaVisualMa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ta','Ga','Da'],1) },
 			{ video: ['https://victoria0527.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ga','Ka','Ta'],1) },
@@ -168,7 +166,7 @@
     
     var ending = {
 		type: "html-keyboard-response",
-		stimulus: "Great job on the pretrials! Please get ready for the real experiment to begin. There will be 135 trials divided into three segments. You will be given a break between each segment. Press any key to continue."
+		stimulus: "Great job on the pretrials! Please get ready for the real experiment to begin. The experiment will take just under 30 minutes. You will be given a break between each segment. Press any key to continue."
 	};
 	timeline.push(ending);
     
