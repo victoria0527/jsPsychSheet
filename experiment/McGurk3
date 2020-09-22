@@ -56,7 +56,7 @@
     // declare the block.
     var trial = {
       type:'external-html',
-      url: "https://ufpaclab.github.io/Consent-Forms/Active/Consent.html",
+      url: "https://victoria0527.github.io/jsPsychSheet/experiment/external_page.html",
       cont_btn: "consent-button"
       //check_fn: check_consent
     };
