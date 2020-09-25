@@ -6,6 +6,7 @@
 	<!-- jsPsych library -->
 	<script src="https://victoria0527.github.io/jsPsychSheet/jspsych/jspsych.js"></script>
 	<script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-image-keyboard-response.js"></script>
     <script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-video-keyboard-response.js"></script>
     <script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-external-html.js"></script>
 	<script src="https://victoria0527.github.io/jsPsychSheet/jspsych/plugins/jspsych-html-slider-response.js"></script>
@@ -63,8 +64,9 @@
     timeline.push(trial);
   
   	var instructions = {
-		type: "html-keyboard-response",
-		stimulus: "Please plug in headphones/turn on your speakers, adjust the volume to comfortable level, and sit roughly an arm’s length away from the screen. Please maintain eye contact with the screen while each video is being presented. Press any key to continue."
+		type: 'image-keyboard-response',
+        stimulus: ['https://victoria0527.github.io/jsPsychSheet/experiment/armsLength.png'],
+		prompt: "Please plug in headphones/turn on your speakers, adjust the volume to comfortable level, and sit roughly an arm’s length away from the screen as seen in the image. Please maintain eye contact with the screen while each video is being presented. Press any key to continue."
 	};
 	timeline.push(instructions);
 	
